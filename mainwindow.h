@@ -20,9 +20,9 @@ public:
 private slots:
     void on_openFileButton_clicked();
 
-    void on_pushButton_Link_clicked();
+    void on_quitButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_connectButton_clicked();
 
 private:
     Ui::MainWindow *ui;

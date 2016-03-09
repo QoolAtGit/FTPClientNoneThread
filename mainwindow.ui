@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>335</width>
+    <width>348</width>
     <height>210</height>
    </rect>
   </property>
@@ -17,9 +17,9 @@
    <widget class="QLabel" name="label_Message">
     <property name="geometry">
      <rect>
-      <x>43</x>
+      <x>40</x>
       <y>20</y>
-      <width>251</width>
+      <width>281</width>
       <height>20</height>
      </rect>
     </property>
@@ -30,9 +30,9 @@
    <widget class="QLineEdit" name="hostLineEdit">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>60</y>
-      <width>181</width>
+      <width>191</width>
       <height>20</height>
      </rect>
     </property>
@@ -40,9 +40,9 @@
    <widget class="QLineEdit" name="portLineEdit">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>90</y>
-      <width>181</width>
+      <width>191</width>
       <height>20</height>
      </rect>
     </property>
@@ -50,7 +50,7 @@
    <widget class="QLabel" name="label_Host">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>40</x>
       <y>60</y>
       <width>31</width>
       <height>16</height>
@@ -69,7 +69,7 @@
    <widget class="QLabel" name="label_Port">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>40</x>
       <y>90</y>
       <width>31</width>
       <height>16</height>
@@ -85,11 +85,11 @@
      <string>Port:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_Link">
+   <widget class="QPushButton" name="connectButton">
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>130</y>
+      <y>170</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -97,12 +97,18 @@
     <property name="text">
      <string>Connect</string>
     </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="openFileButton">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>130</y>
+      <y>170</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -115,7 +121,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>170</y>
+      <y>130</y>
       <width>261</width>
       <height>23</height>
      </rect>
@@ -124,11 +130,11 @@
      <number>24</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="quitButton">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>130</y>
+      <y>170</y>
       <width>75</width>
       <height>23</height>
      </rect>

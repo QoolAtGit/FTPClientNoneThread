@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QGridLayout>
 #include <QFileDialog>
 #include <QDesktopServices>
+#include <QDialogButtonBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,11 +19,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->progressBar->hide();
     ui->hostLineEdit->setText("127.0.0.1");
     ui->portLineEdit->setText("10801");
+
     tcpSocket = new QTcpSocket(this);
-    connect(tcpSocket, &QTcpSocket::readyRead, this, &readMessage);//有数据到来时发出readyRead()，执行readMessage()
+    connect(tcpSocket, &QTcpSocket::readyRead, this, &readMessage);
     connect(tcpSocket, static_cast<void (QTcpSocket:: *)(QAbstractSocket::SocketError)>(&QTcpSocket::error),
             this, &displayError);//出现错误时发出error()，执行displayError()函数
-    connect(ui->pushButton_Link, &QPushButton::clicked, this, &newConnect);
+    connect(ui->connectButton, &QPushButton::clicked, this, &newConnect);
     connect(tcpSocket,&QTcpSocket::disconnected,this,&finish);
 }
 
@@ -35,7 +38,6 @@ void MainWindow::newConnect()
     block.resize(0);
     tcpSocket->abort(); //取消已有的连接
     tcpSocket->connectToHost(ui->hostLineEdit->text(),ui->portLineEdit->text().toInt());
-     //连接到主机，这里从界面获取主机地址和端口号
 }
 
 void MainWindow::readMessage()
@@ -45,7 +47,7 @@ void MainWindow::readMessage()
     ui->label_Message->setText("File receiving...");
     if( reciveSize <= (int)sizeof(quint64)*2 )
     {
-        //如果有则保存到blockSize变量中，没有则返回，继续接收数据
+        //如果有则保存到block变量中，没有则返回，继续接收数据
         if( tcpSocket->bytesAvailable() >= (int)sizeof(quint64)*2 && fileNameSize==0 )
         {
             in>>totalSize>>fileNameSize;
@@ -115,7 +117,7 @@ void MainWindow::displayError(QAbstractSocket::SocketError socketError)
                                  .arg(tcpSocket->errorString()));
         ui->label_Message->setText(tr("Server connect error:%1.").arg(tcpSocket->errorString()));
     }
-    ui->pushButton_Link->setDisabled(false);
+    ui->connectButton->setDisabled(false);
 }
 
 void MainWindow::on_openFileButton_clicked()
@@ -131,17 +133,18 @@ void MainWindow::finish()
     fileName="";
     writeFile->close();
     block.resize(0);
-    ui->pushButton_Link->setDisabled(false);
+    ui->connectButton->setDisabled(false);
     ui->label_Message->setText("Client receive succesed,you can continue now.");
 }
 
-void MainWindow::on_pushButton_Link_clicked()
-{
-    ui->pushButton_Link->setDisabled(true);
-    ui->label_Message->setText("Trying connect to server...");
-}
-
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_quitButton_clicked()
 {
     close();
+}
+
+void MainWindow::on_connectButton_clicked()
+{
+    ui->connectButton->setDisabled(true);
+    ui->progressBar->setMaximum(0);
+    ui->label_Message->setText("Waiting server respond...");
 }
