@@ -1,0 +1,6 @@
+#include <QtNetwork>
+QTcpSocket *client;
+char *data="hello qt!";
+client = new QTcpSocket(this);
+client->connectToHost(QHostAddress("10.21.11.66"), 6665);
+client->write(data);
